@@ -24,40 +24,43 @@
     var answer1;
 
     var choiceIndex;
+
+    var i = 0;
  
     document.onkeyup=function() {
                answer1 = event.key.toLowerCase();
             
             if (answer1 === 'y' && firstq === false) {
                 console.log(answer1);
-                document.getElementById("quest").innerHTML = johnsnow.spaces;
+                document.getElementById("quest").innerHTML = teams[i].spaces;
                 firstq = true;
             }
             
-            else if(johnsnow.word.indexOf(answer1) > -1) {
+            else if(teams[i].name.indexOf(answer1) > -1) {
                 
                 //////////allOccurances finds the number of times the letter occurs/////
-                allOccurances(johnsnow.word, answer1); 
+                allOccurances(teams[i].name, answer1); 
 
                 //////////for loop that goes thru all multiples of letters//////
                 for (var t = 0; t < results.length; t++) {
                   var occur = results[t];
                   
-                  choiceIndex = johnsnow.word[occur];
+                  choiceIndex = teams[i].name[occur];
                   console.log("log index " + choiceIndex);
-                  var temp = johnsnow.spaces.split('');
+                  var temp = teams[i].spaces.split('');
                   console.log(temp);
                   temp[occur] = answer1;
                   console.log(temp);
-                  johnsnow.spaces = temp.join('');
+                  teams[i].spaces = temp.join('');
                 }
-                document.getElementById("quest").innerHTML = johnsnow.spaces;
+                document.getElementById("quest").innerHTML = teams[i].spaces;
                 document.getElementById("result").innerHTML = "correct!"
+            
         
             
             }
 
-            else if (johnsnow.word.indexOf(answer1) < 0) {
+            else if (teams[i].name.indexOf(answer1) < 0) {
                 document.getElementById("result").innerHTML = "wrong!"
             }
     }
@@ -68,12 +71,16 @@
 
 
 /////////////////////CREATES WORD ARRAYS///////////////////////////
-     function wFormat(word, spaces) {
-         this.word = word;
+     function team(name, spaces) {
+         this.name = name;
          this.spaces = spaces;
+
      }
 
-     var johnsnow = new wFormat("johnsnow", "--------");
+     var jets = new team("jets", "----");
+     var bears = new team("bears", "-----");
+     var eagles = new team("eagles", "------");
+     var teams = [jets, bears, eagles];
 
 
 ///////////////////Functions////////////////////////////////////////////////////////
