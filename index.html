@@ -2,7 +2,7 @@
 <html lang="en-us">
   <head>
     <meta charset="UTF-8">
-    <title>Question Game</title>
+    <title>NFL Word Guess Game</title>
     
   </head>
   <body>
@@ -17,82 +17,8 @@
 
     </body>
 
-    <script type="text/javascript">
+    <script type="text/javascript" src="assets/javascript/javascript.js">
+    </script>
+
     
-    var firstq = false;
-    
-    var answer1;
-
-    var choiceIndex;
-
-    var i = 0;
- 
-    document.onkeyup=function() {
-               answer1 = event.key.toLowerCase();
-            
-            if (answer1 === 'y' && firstq === false) {
-                console.log(answer1);
-                document.getElementById("quest").innerHTML = teams[i].spaces;
-                firstq = true;
-            }
-            
-            else if(teams[i].name.indexOf(answer1) > -1) {
-                
-                //////////allOccurances finds the number of times the letter occurs/////
-                allOccurances(teams[i].name, answer1); 
-
-                //////////for loop that goes thru all multiples of letters//////
-                for (var t = 0; t < results.length; t++) {
-                  var occur = results[t];
-                  
-                  choiceIndex = teams[i].name[occur];
-                  console.log("log index " + choiceIndex);
-                  var temp = teams[i].spaces.split('');
-                  console.log(temp);
-                  temp[occur] = answer1;
-                  console.log(temp);
-                  teams[i].spaces = temp.join('');
-                }
-                document.getElementById("quest").innerHTML = teams[i].spaces;
-                document.getElementById("result").innerHTML = "correct!"
-            
-        
-            
-            }
-
-            else if (teams[i].name.indexOf(answer1) < 0) {
-                document.getElementById("result").innerHTML = "wrong!"
-            }
-    }
-
-
-
-
-
-
-/////////////////////CREATES WORD ARRAYS///////////////////////////
-     function team(name, spaces) {
-         this.name = name;
-         this.spaces = spaces;
-
-     }
-
-     var jets = new team("jets", "----");
-     var bears = new team("bears", "-----");
-     var eagles = new team("eagles", "------");
-     var teams = [jets, bears, eagles];
-
-
-///////////////////Functions////////////////////////////////////////////////////////
-
-
-/////////////////returns all occurances of particular letter//////////////
-function allOccurances(aRay, x) {
-    results = [];
-    for(var i = 0; i < aRay.length; i++)
-        if (aRay[i] === x)
-            results.push(i);
-    return results;
-}
-</script>
 </html>
