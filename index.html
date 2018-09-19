@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="UTF-8">
+    <title>Question Game</title>
+    
+  </head>
+  <body>
+    <h2>Welcome to the Word Guess Game!</h2>
+
+    <h3 id="quest">Are you ready to begin? (Press Y or N)</h3>
+
+    <span>Guess: </span><span id="result"></span><br><br>
+
+
+    <span>Score: </span><span id="score">0</span>
+
+    </body>
+
+    <script type="text/javascript">
+    
+    var firstq = false;
+    
+    var answer1;
+
+    var choiceIndex;
+ 
+    document.onkeyup=function() {
+               answer1 = event.key.toLowerCase();
+            
+            if (answer1 === 'y' && firstq === false) {
+                console.log(answer1);
+                document.getElementById("quest").innerHTML = johnsnow.spaces;
+                firstq = true;
+            }
+            
+            else if(johnsnow.word.indexOf(answer1) > -1) {
+                
+                //////////allOccurances finds the number of times the letter occurs/////
+                allOccurances(johnsnow.word, answer1); 
+
+                //////////for loop that goes thru all multiples of letters//////
+                for (var t = 0; t < results.length; t++) {
+                  var occur = results[t];
+                  
+                  choiceIndex = johnsnow.word[occur];
+                  console.log("log index " + choiceIndex);
+                  var temp = johnsnow.spaces.split('');
+                  console.log(temp);
+                  temp[occur] = answer1;
+                  console.log(temp);
+                  johnsnow.spaces = temp.join('');
+                }
+                document.getElementById("quest").innerHTML = johnsnow.spaces;
+                document.getElementById("result").innerHTML = "correct!"
+        
+            
+            }
+
+            else if (johnsnow.word.indexOf(answer1) < 0) {
+                document.getElementById("result").innerHTML = "wrong!"
+            }
+    }
+
+
+
+
+
+
+/////////////////////CREATES WORD ARRAYS///////////////////////////
+     function wFormat(word, spaces) {
+         this.word = word;
+         this.spaces = spaces;
+     }
+
+     var johnsnow = new wFormat("johnsnow", "--------");
+
+
+///////////////////Functions////////////////////////////////////////////////////////
+
+
+/////////////////returns all occurances of particular letter//////////////
+function allOccurances(aRay, x) {
+    results = [];
+    for(var i = 0; i < aRay.length; i++)
+        if (aRay[i] === x)
+            results.push(i);
+    return results;
+}
+</script>
+</html>
