@@ -8,15 +8,31 @@
 
     var i = 0;
 
+    var guessremain = 15;
+
+    var wrongGuessArray = [];
+
     ////////////"body" of word guess//////////////////
  
     document.onkeyup=function() {
                answer1 = event.key.toLowerCase();
-            
-            if (answer1 === 'y' && firstq === false) {
+               statusUpdate("");
+               changeStatus("Enter your guess.");
+            if (answer1 && firstq === false) {
                 console.log(answer1);
-                document.getElementById("quest").innerHTML = teams[i].spaces;
+                teamUpdate(teams[i].spaces);
                 firstq = true;
+                if (i >= 1) {
+                    //////advances round//////////////
+                    round(i+1);
+                    wrongGuessArray.length = 0;
+                    document.getElementById("wguess").innerHTML = wrongGuessArray; 
+
+                }
+            }
+
+            else if (wrongGuessArray.indexOf(answer1) > -1) {
+                changeStatus("Already guessed incorrectly, try again.");
             }
             
             else if(teams[i].name.indexOf(answer1) > -1) {
@@ -36,20 +52,26 @@
                   console.log(temp);
                   teams[i].spaces = temp.join('');
                 }
-                document.getElementById("quest").innerHTML = teams[i].spaces;
-                document.getElementById("result").innerHTML = "correct!";
+                teamUpdate(teams[i].spaces);
+                changeStatus("correct!");
                 if (teams[i].name === teams[i].spaces) {
-                    alert("You guessed the Team!");
+                    changeStatus("You guessed the Team!");
                     i = i + 1;
                     firstq = false;
-                    alert("Press 'y' for next round!");
+                    statusUpdate("Press any key to advance to next round!");
+                    //////resets wrong guess array////
+           
                 }
         
             
             }
 
             else if (teams[i].name.indexOf(answer1) < 0) {
-                document.getElementById("result").innerHTML = "wrong!"
+                changeStatus("Wrong! Try Again.")
+                wrongGuess(answer1);
+                guessR();
+                
+
             }
     }
 
@@ -108,4 +130,45 @@ function allOccurances(aRay, x) {
         if (aRay[i] === x)
             results.push(i);
     return results;
+}
+
+//////////////////Changes the status update/////////////////////////////
+
+function changeStatus(message) {
+    document.getElementById("result").innerHTML = message;
+}
+
+/////////////////Changes the status update/////////////////////////////
+
+function statusUpdate(message) {
+    document.getElementById("quest").innerHTML = message;
+}
+
+/////////////////Changes the round / score/////////////////////////////
+
+function round(message) {
+    document.getElementById("score").innerHTML = message;
+}
+
+/////////////////Subtracts number of guesses and updates///////////////
+
+function guessR() {
+    guessremain = guessremain - 1;
+    document.getElementById("rguess").innerHTML = guessremain;
+    if (guessremain === 0) {
+        alert("Game Over!")
+    }
+}
+
+/////////////////Changes team / dash field /////////////////////////////
+
+function teamUpdate(message) {
+    document.getElementById("team").innerHTML = message;
+}
+
+/////////////////Updates Wrong Guess Field /////////////////////////////
+
+function wrongGuess(letter) {
+    wrongGuessArray.push(letter);
+    document.getElementById("wguess").innerHTML = wrongGuessArray;
 }

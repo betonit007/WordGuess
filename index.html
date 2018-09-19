@@ -3,17 +3,23 @@
   <head>
     <meta charset="UTF-8">
     <title>NFL Word Guess Game</title>
-    
+    <link rel="stylesheet" type="text/css" href="assets/css/reset.css">
+    <link rel="stylesheet" type="text/css" href="assets/css/css.css"> 
   </head>
   <body>
-    <h2>Welcome to the Word Guess Game!</h2>
+    <h1>Welcome to the Word Guess Game!</h1>
 
-    <h3 id="quest">Are you ready to begin? (Press Y or N)</h3>
+    <div id="team">Team</div>
 
-    <span>Guess: </span><span id="result"></span><br><br>
+    <h3 id="quest">Press any key to begin!</h3>
+
+    <span id="status">Status: </span><span id="result">Hold</span><br><br>
 
 
-    <span>Score: </span><span id="score">0</span>
+    <span>Round: </span><span id="score">1</span><br>
+    <span>Guesses remaining: </span><span id="rguess">15</span><br>
+
+    <span>Wrong Guesses: </span><span id=wguess>none</span>
 
     </body>
 
