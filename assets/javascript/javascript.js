@@ -25,6 +25,7 @@
                 if (i >= 1) {
                     //////advances round//////////////
                     round(i+1);
+                     //////resets wrong guess array////
                     wrongGuessArray.length = 0;
                     document.getElementById("wguess").innerHTML = wrongGuessArray; 
 
@@ -56,13 +57,14 @@
                 changeStatus("correct!");
                 if (teams[i].name === teams[i].spaces) {
                     changeStatus("You guessed the Team!");
+                    if (teams[i].sbyte !== 0) {
+                        teams[i].sbyte.play();
+                    }
                     i = i + 1;
                     firstq = false;
                     statusUpdate("Press any key to advance to next round!");
-                    //////resets wrong guess array////
            
                 }
-        
             
             }
 
@@ -77,13 +79,14 @@
 
 
 /////////////////////CREATES WORD ARRAYS///////////////////////////
-     function team(name, spaces) {
+     function team(name, spaces, sbyte) {
          this.name = name;
          this.spaces = spaces;
+         this.sbyte = sbyte;
 
      }
 
-     var jets = new team("jets", "----");
+     var jets = new team("jets", "----", 1);
      var bears = new team("bears", "-----");
      var eagles = new team("eagles", "------");
      var cards = new team("cardinals", "---------");
@@ -113,11 +116,14 @@
      var seahawks = new team("seahawks", "--------");
      var titans = new team("titans", "------");
      var redskins = new team("redskins", "--------");
-
+    
 
      var teams = [jets, bears, eagles, cards, ravens, bills, panthers, bengals, browns, cowboys, broncos,
                  lions, packers, texans, colts, jaguars, chiefs, chargers, rams, dolphins, vikings,
                  patriots, saints, giants, raiders, steelers, niners, seahawks, titans, redskins];
+
+/////////////////////sounds added to team array////////////////////////////////////
+teams[0].sbyte = new Audio("assets/sounds/jets.mp3");
 
 
 ///////////////////Functions////////////////////////////////////////////////////////
