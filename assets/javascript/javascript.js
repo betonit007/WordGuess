@@ -12,14 +12,19 @@
 
     var wrongGuessArray = [];
 
+    var intro = new Audio("assets/sounds/MNF.mp3");
+
     ////////////"body" of word guess//////////////////
  
     document.onkeyup=function() {
-               answer1 = event.key.toLowerCase();
-               statusUpdate("");
-               changeStatus("Enter your guess.");
+            answer1 = event.key.toLowerCase();
+            statusUpdate("");
+            changeStatus("Enter your guess.");
             if (answer1 && firstq === false) {
                 console.log(answer1);
+                if (i === 0) {
+                    intro.play();
+                }
                 teamUpdate(teams[i].spaces);
                 firstq = true;
                 if (i >= 1) {
