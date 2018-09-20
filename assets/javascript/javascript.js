@@ -6,7 +6,7 @@
 
     var choiceIndex;
 
-    var i = 15;
+    var i = 0;
 
     var guessremain = 19;
 
