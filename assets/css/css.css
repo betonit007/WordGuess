@@ -1,7 +1,47 @@
 h1 {
     color: red;
+    font-size: 48px;
+    text-align: center;
+    
+
 }
 
 #team{
     font-size: 300%;
 }
+
+body {
+    font-family: 'Bungee Inline', cursive;
+    background-image: url("assets/images/backgroundresized.jpg");
+    background-repeat: no-repeat;
+    background-attachment:fixed;
+    background-position:center;
+    background-color: black;
+    color: red;
+}
+   
+
+#container { 
+
+    margin: 0 auto;
+    background-color:aqua;
+    height: 800px;
+    width: 600px;
+    text-align: center;
+}
+
+#picbox {
+    height: 250px;
+    width: 600px;
+    background-color: orange;
+}
+
+#team {
+    height: 150px;
+    width: 600px;
+    text-align: center;
+    background-color:plum;
+    padding-top: 100px;
+    font-size:75px;
+}
+
