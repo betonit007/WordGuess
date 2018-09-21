@@ -8,7 +8,7 @@
 
     var i = 0;
 
-    var guessremain = 19;
+    var guessremain = 15;
 
     var wrongGuessArray = [];
 
