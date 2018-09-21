@@ -23,12 +23,26 @@
     /////////////Clears helmet from previous round///
             $("#picbox img:last-child").remove();         
             if (answer1 && firstq === false) {
+
+                ///////Win Game///////////////
+                if (i === 30) {
+                    teamUpdate("You Won!");
+                    $("#picbox").append("<img src='assets/images/trophy.png'>");
+                    intro.play();
+                }
+
                 if (i === 0) {
                     intro.play();
                 }
+                //////////RESETS AND ADDS DASHES TO TEAM SPACES///////
+                teams[i].spaces = [];
+                for (var b = 0; b < teams[i].name.length; b++) {
+                    teams[i].spaces.push("-");
+                }
+                teams[i].spaces = teams[i].spaces.join("");
                 teamUpdate(teams[i].spaces);
                 firstq = true;
-                if (i >= 1) {
+                if (firstq) {
                 ///////////advances round//////////////
                     round(i+1);
                 ///////////resets wrong guess array////
@@ -67,6 +81,7 @@
                     $("#picbox").append(teams[i].imgs);
                     
                     i = i + 1;
+                    
                     firstq = false;
                     statusUpdate("Press any key to advance to next round!");
                     
@@ -79,7 +94,11 @@
                 //////Jquery to add helmet to picbox////
                 $("#picbox").append("<img id='addhelmet' src='assets/images/defeat.jpg'>");
                 teamUpdate("Game Over");
-                changeStatus("Hit refresh Key to Start over.");
+                changeStatus("Hit any Key to Start over.");
+                i = 0;
+                firstq = false;
+                wrongGuessArray = [];
+                guessremain = 15;
             
             }
 
@@ -94,44 +113,44 @@
 
 
 /////////////////////CREATES WORD ARRAYS///////////////////////////
-     function team(name, spaces, sbyte, imgs) {
+     function team(name, sbyte, imgs) {
          this.name = name;
-         this.spaces = spaces;
+         this.spaces = [];
          this.sbyte = sbyte;
          this.imgs = imgs;
 
      }
 
-     var jets = new team("jets", "----", 1, "<img id='addhelmet' src='assets/images/jets.png'>");
-     var bears = new team("bears", "-----", 0, "<img id='addhelmet' src='assets/images/bears.png'>");
-     var eagles = new team("eagles", "------", 0, "<img id='addhelmet' src='assets/images/eagles.png'>");
-     var cards = new team("cardinals", "---------", 0, "<img id='addhelmet' src='assets/images/cards.png'>");
-     var ravens = new team("ravens", "------", 0, "<img id='addhelmet' src='assets/images/ravens.png'>");
-     var bills = new team("bills", "-----", 0, "<img id='addhelmet' src='assets/images/bills.png'>");
-     var panthers = new team("panthers", "--------", 0, "<img id='addhelmet' src='assets/images/panthers.png'>");
-     var bengals = new team("bengals", "-------", 0, "<img id='addhelmet' src='assets/images/bengals.png'>");
-     var browns = new team("browns", "------", 0, "<img id='addhelmet' src='assets/images/browns.png'>");
-     var cowboys = new team("cowboys", "-------", 0, "<img id='addhelmet' src='assets/images/cowboys.png'>");
-     var broncos = new team("broncos", "-------", 0, "<img id='addhelmet' src='assets/images/broncos.png'>");
-     var lions = new team("lions", "-----", 0, "<img id='addhelmet' src='assets/images/lions.png'>");
-     var packers = new team("packers", "-------", 0, "<img id='addhelmet' src='assets/images/packers.png'>");
-     var texans = new team("texans", "------", 0, "<img id='addhelmet' src='assets/images/texans.png'>");
-     var colts = new team("colts", "-----", 0, "<img id='addhelmet' src='assets/images/colts.png'>");
-     var jaguars = new team("jaguars", "-------", 0, "<img id='addhelmet' src='assets/images/jaguars.png'>");
-     var chiefs = new team("chiefs", "------", 0, "<img id='addhelmet' src='assets/images/chiefs.png'>");
-     var chargers = new team("chargers", "--------", 0, "<img id='addhelmet' src='assets/images/chargers.png'>");
-     var rams = new team("rams", "----", 0, "<img id='addhelmet' src='assets/images/rams.png'>");
-     var dolphins = new team("dolphins", "--------", 0, "<img id='addhelmet' src='assets/images/dolphins.png'>");
-     var vikings = new team("vikings", "-------", 0, "<img id='addhelmet' src='assets/images/vikings.png'>");
-     var patriots = new team("patriots", "--------", 0, "<img id='addhelmet' src='assets/images/patriots.png'>");
-     var saints = new team("saints", "------", 0, "<img id='addhelmet' src='assets/images/saints.png'>");
-     var giants = new team("giants", "------", 0, "<img id='addhelmet' src='assets/images/giants.png'>");
-     var raiders = new team("raiders", "-------", 0, "<img id='addhelmet' src='assets/images/raiders.png'>");
-     var steelers = new team("steelers", "--------", 0, "<img id='addhelmet' src='assets/images/steelers.png'>");
-     var niners = new team("fortyniners", "-----------", 0, "<img id='addhelmet' src='assets/images/49ers.png'>");
-     var seahawks = new team("seahawks", "--------", 0, "<img id='addhelmet' src='assets/images/seahawks.png'>");
-     var titans = new team("titans", "------", 0, "<img id='addhelmet' src='assets/images/titans.png'>");
-     var redskins = new team("redskins", "--------", 0, "<img id='addhelmet' src='assets/images/redskins.png'>");
+     var jets = new team("jets", 1, "<img id='addhelmet' src='assets/images/jets.png'>");
+     var bears = new team("bears", 0, "<img id='addhelmet' src='assets/images/bears.png'>");
+     var eagles = new team("eagles", 0, "<img id='addhelmet' src='assets/images/eagles.png'>");
+     var cards = new team("cardinals", 0, "<img id='addhelmet' src='assets/images/cards.png'>");
+     var ravens = new team("ravens", 0, "<img id='addhelmet' src='assets/images/ravens.png'>");
+     var bills = new team("bills", 0, "<img id='addhelmet' src='assets/images/bills.png'>");
+     var panthers = new team("panthers", 0, "<img id='addhelmet' src='assets/images/panthers.png'>");
+     var bengals = new team("bengals", 0, "<img id='addhelmet' src='assets/images/bengals.png'>");
+     var browns = new team("browns", 0, "<img id='addhelmet' src='assets/images/browns.png'>");
+     var cowboys = new team("cowboys", 0, "<img id='addhelmet' src='assets/images/cowboys.png'>");
+     var broncos = new team("broncos", 0, "<img id='addhelmet' src='assets/images/broncos.png'>");
+     var lions = new team("lions", 0, "<img id='addhelmet' src='assets/images/lions.png'>");
+     var packers = new team("packers", 0, "<img id='addhelmet' src='assets/images/packers.png'>");
+     var texans = new team("texans", 0, "<img id='addhelmet' src='assets/images/texans.png'>");
+     var colts = new team("colts", 0, "<img id='addhelmet' src='assets/images/colts.png'>");
+     var jaguars = new team("jaguars", 0, "<img id='addhelmet' src='assets/images/jaguars.png'>");
+     var chiefs = new team("chiefs", 0, "<img id='addhelmet' src='assets/images/chiefs.png'>");
+     var chargers = new team("chargers", 0, "<img id='addhelmet' src='assets/images/chargers.png'>");
+     var rams = new team("rams", 0, "<img id='addhelmet' src='assets/images/rams.png'>");
+     var dolphins = new team("dolphins", 0, "<img id='addhelmet' src='assets/images/dolphins.png'>");
+     var vikings = new team("vikings", 0, "<img id='addhelmet' src='assets/images/vikings.png'>");
+     var patriots = new team("patriots", 0, "<img id='addhelmet' src='assets/images/patriots.png'>");
+     var saints = new team("saints", 0, "<img id='addhelmet' src='assets/images/saints.png'>");
+     var giants = new team("giants", 0, "<img id='addhelmet' src='assets/images/giants.png'>");
+     var raiders = new team("raiders", 0, "<img id='addhelmet' src='assets/images/raiders.png'>");
+     var steelers = new team("steelers", 0, "<img id='addhelmet' src='assets/images/steelers.png'>");
+     var niners = new team("fortyniners", 0, "<img id='addhelmet' src='assets/images/49ers.png'>");
+     var seahawks = new team("seahawks", 0, "<img id='addhelmet' src='assets/images/seahawks.png'>");
+     var titans = new team("titans", 0, "<img id='addhelmet' src='assets/images/titans.png'>");
+     var redskins = new team("redskins", 0, "<img id='addhelmet' src='assets/images/redskins.png'>");
     
 
      var teams = [jets, bears, eagles, cards, ravens, bills, panthers, bengals, browns, cowboys, broncos,
