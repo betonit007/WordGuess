@@ -69,8 +69,17 @@
                     i = i + 1;
                     firstq = false;
                     statusUpdate("Press any key to advance to next round!");
+                    
            
                 }
+            
+            }
+            /////////////////Game Reset//////////////////////////
+            else if ((guessremain-1) === 0) {
+                //////Jquery to add helmet to picbox////
+                $("#picbox").append("<img id='addhelmet' src='assets/images/defeat.jpg'>");
+                teamUpdate("Game Over");
+                changeStatus("Hit refresh Key to Start over.");
             
             }
 
@@ -168,9 +177,7 @@ function round(message) {
 function guessR() {
     guessremain = guessremain - 1;
     document.getElementById("rguess").innerHTML = guessremain;
-    if (guessremain === 0) {
-        alert("Game Over!")
-    }
+    
 }
 
 /////////////////Changes team / dash field /////////////////////////////
@@ -183,5 +190,6 @@ function teamUpdate(message) {
 
 function wrongGuess(letter) {
     wrongGuessArray.push(letter);
-    document.getElementById("wguess").innerHTML = wrongGuessArray;
+    var noCommas = wrongGuessArray.join(" ");///removes commas
+    document.getElementById("wguess").innerHTML = noCommas;
 }
